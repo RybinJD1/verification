@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    	http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="question" author="alex">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="question"/>
+            </not>
+        </preConditions>
+        <createTable tableName="question">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(450)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="answer" author="alex">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="answer"/>
+            </not>
+        </preConditions>
+        <createTable tableName="answer">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(450)"/>
+            <column name="flag" type="boolean"/>
+            <column name="question_id" type ="int">
+                <constraints foreignKeyName="question_id" referencedTableName="question" referencedColumnNames="id" deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+
+
+
+</databaseChangeLog>

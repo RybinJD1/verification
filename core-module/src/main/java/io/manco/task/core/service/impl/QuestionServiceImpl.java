@@ -1,10 +1,11 @@
-package io.manco.task.core.service;
+package io.manco.task.core.service.impl;
 
 import com.google.common.collect.Lists;
 import io.manco.task.core.domain.Answer;
 import io.manco.task.core.domain.Question;
 import io.manco.task.core.repository.AnswerRepository;
 import io.manco.task.core.repository.QuestionRepository;
+import io.manco.task.core.service.QuestionService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -34,7 +35,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List<Question> findAll() {
-        return  Lists.newArrayList(questionRepository.findAll());
+        return Lists.newArrayList(questionRepository.findAll());
     }
 
     @Override
@@ -49,18 +50,18 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public boolean isQuestionExist(Question question) {
-        return findByDescription(question.getDescription())!=null;
+        return findByDescription(question.getDescription()) != null;
     }
 
     @Override
-    public Question getRandomQuestion(){
-        while (true){
+    public Question getRandomQuestion() {
+        while (true) {
             List<Question> questions = Lists.newArrayList(questionRepository.findAll());
             Collections.shuffle(questions);
             Question question = questions.get(0);
 
             List<Answer> listAnswers = answerRepository.findByQuestionId(question.getId());
-            if(!listAnswers.isEmpty()) {
+            if (!listAnswers.isEmpty()) {
                 question.setListAnswers(listAnswers);
                 return question;
             }

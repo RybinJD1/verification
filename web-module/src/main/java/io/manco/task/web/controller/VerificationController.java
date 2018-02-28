@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(value = "/verification")
 public class VerificationController {
 
     @Autowired
@@ -17,20 +18,6 @@ public class VerificationController {
 
     @Autowired
     private AnswerService answerService;
-
-    @GetMapping("/hello")
-    public String hello(){
-        return "Hello!";
-    }
-    @GetMapping("/allQues")
-    public String allQuestion(){
-        return questionService.findAll().toString();
-    }
-
-    @GetMapping("/allAns")
-    public String allAnswer(){
-        return answerService.findAll().toString();
-    }
 
     @RequestMapping(value = "/randomQuestion", method = RequestMethod.GET)
     public ResponseEntity<Question> getRandomQuestion() {
@@ -41,10 +28,10 @@ public class VerificationController {
         return new ResponseEntity<Question>(question, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/right/{ans}", method = RequestMethod.GET) ///доделать!!!
-    public ResponseEntity<Answer> getRightAnswer(@PathVariable("ans") String ans){
+    @RequestMapping(value = "/right/{ans}", method = RequestMethod.GET)
+    public ResponseEntity<Answer> getRightAnswer(@PathVariable("ans") String ans) {
         Answer answer = answerService.findByDescription(ans);
-        if(!answer.isFlag()){
+        if (!answer.isFlag()) {
             return new ResponseEntity<Answer>(answer, HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<Answer>(answer, HttpStatus.OK);

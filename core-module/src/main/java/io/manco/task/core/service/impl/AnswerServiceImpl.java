@@ -1,8 +1,9 @@
-package io.manco.task.core.service;
+package io.manco.task.core.service.impl;
 
 import com.google.common.collect.Lists;
 import io.manco.task.core.domain.Answer;
 import io.manco.task.core.repository.AnswerRepository;
+import io.manco.task.core.service.AnswerService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public void delete(Integer id) {
-         repository.delete(id);
+        repository.delete(id);
     }
 
     @Override
@@ -48,6 +49,6 @@ public class AnswerServiceImpl implements AnswerService {
 
 
     public boolean isAnswerExist(Answer answer) {
-        return findByDescription(answer.getDescription())!=null;
+        return findByDescription(answer.getDescription()) != null;
     }
 }

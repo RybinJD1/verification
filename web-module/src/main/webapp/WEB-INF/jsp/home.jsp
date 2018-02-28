@@ -27,7 +27,7 @@
         });
         function display(list) {
                 $.each(list, function (index, answer) {
-                    $('#listAnswers').append('<li><a href="#" data-identity="' + answer.flag + '">' + answer.description + '</a></li>');
+                    $('#listAnswers').append('<li><a href="http://localhost:8080/verification/right/{ans}" data-identity="' + answer.flag + '">' + answer.description + '</a></li>');
                 });
         }
     </script>

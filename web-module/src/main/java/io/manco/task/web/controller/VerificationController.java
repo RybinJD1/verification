@@ -28,7 +28,7 @@ public class VerificationController {
         return new ResponseEntity<Question>(question, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/right/{ans}", method = RequestMethod.GET)
+    @RequestMapping(value = "/right/{ans}", method = RequestMethod.POST)
     public ResponseEntity<Answer> getRightAnswer(@PathVariable("ans") String ans) {
         Answer answer = answerService.findByDescription(ans);
         if (!answer.isFlag()) {
